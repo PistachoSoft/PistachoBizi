@@ -2,14 +2,14 @@
 
 <div class="container margin-to-navbar height-90">
     <div class="row height-90">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="custom-jumbo">
                 <form ng-submit="findRoute()">
                     <div class="input-group">
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-log-out"></span>
                         </div>
-                        <input class="form-control" type="text" ng-model="origin" placeholder="Origin">
+                        <input class="form-control" type="text" id="origin" ng-model="origin" placeholder="Origin" g-places-autocomplete>
                     </div>
                     <br>
 
@@ -17,14 +17,14 @@
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-log-in"></span>
                         </div>
-                        <input class="form-control" type="text" ng-model="destination" placeholder="Destination">
+                        <input class="form-control" type="text" id="destination" ng-model="destination" placeholder="Destination" readonly>
                     </div>
                     <br>
                     <button class="btn btn-block btn-primary" type="submit">Route me!</button>
                 </form>
             </div>
         </div>
-        <div class="col-md-7 height-100">
+        <div class="col-md-6 height-100">
             <div class="custom-jumbo height-100">
                 <div id="map"></div>
             </div>
