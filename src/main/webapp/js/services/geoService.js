@@ -5,6 +5,7 @@ angular.module('starter')
         var mapOptions;
         var map;
         var infowindow;
+        var directionsDisplay;
 
         return ({
             start: start,
@@ -20,6 +21,9 @@ angular.module('starter')
             };
             map = new google.maps.Map(document.getElementById('map'), mapOptions);
             infowindow = new google.maps.InfoWindow();
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay.setMap(map);
+            directionsDisplay.setOptions( { suppressMarkers: true } );
         };
 
         function createAutocomplete($scope,id){
@@ -72,7 +76,8 @@ angular.module('starter')
                             "<li>"+"Bicis: "+event.feature.getProperty("bicisDisponibles")+"</li>"+
                             "<li>"+"Huecos: "+event.feature.getProperty("anclajesDisponibles")+"</li>"+
                             "<li>"+"Id: "+event.feature.getProperty("id")+"</li>"+
-                            "</ul>");
+                            "</ul>"
+                        );
                         infowindow.setPosition(event.feature.getGeometry().get());
                         infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
                         infowindow.open(map);
@@ -81,6 +86,17 @@ angular.module('starter')
         };
 
         function findRoute(origin, dest_lat, dest_lng) {
+            var directionsService = new google.maps.DirectionsService();
+            var request = {
+                origin:origin,
+                destination:new google.maps.LatLng(dest_lat,dest_lng),
+                travelMode: google.maps.TravelMode.WALKING
+            };
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
             /*$http.get(
                 "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=" + origin +
@@ -95,5 +111,22 @@ angular.module('starter')
                 .success(function (data) {
                     console.log(data);
                 });*/
-        }
+        };
+
+        function geolocate($scope){
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                        position.coords.longitude);
+
+                    $scope.destination_coords = pos;
+                    //map.setCenter(pos);
+                }, function() {
+                    console.log("HAHA NO GEOLOCATION 4 U PUSSY");
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                console.log("HAHA NO GEOLOCATION 4 U PUSSY");
+            }
+        };
     }]);
