@@ -42,9 +42,9 @@
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-globe"></span>
                             </div>
-                            <select class="form-control" ng-format="town">
-                                <option>Derp</option>
-                                <option>Foobar</option>
+                            <select class="form-control" ng-model="town" ng-options="t.town for t in towns">
+                                <!--<option>Derp</option>-->
+                                <!--<option>Foobar</option>-->
                             </select>
                         </div>
                         <br>
@@ -53,7 +53,7 @@
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-envelope"></span>
                             </div>
-                            <select class="form-control" ng-format="envelope">
+                            <select class="form-control" ng-model="envelope" ng-options="e.env for e in envelopes">
                                 <option>JSON</option>
                                 <option>XML</option>
                             </select>

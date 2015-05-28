@@ -5,12 +5,27 @@ angular.module('starter')
         geoService.start();
         weatherService.start();
 
-        geoService.createAutocomplete($scope,'origin');
-        geoService.placeBizis($scope);
-
+        //Gmaps vars
         $scope.origin = null;
         $scope.destination = null;
         $scope.destination_coords = null;
+
+        //Weather vars
+        $scope.town = null;
+        $scope.towns = [];
+        $scope.envelopes = [
+            {
+                env: "JSON"
+            },
+            {
+                env: "XML"
+            }
+        ];
+        $scope.envelope = $scope.envelopes[0];
+
+        geoService.createAutocomplete($scope,'origin');
+        geoService.placeBizis($scope);
+        weatherService.getTowns($scope);
 
         $scope.findRoute = function(){
             if($scope.origin==null) return;
@@ -21,13 +36,10 @@ angular.module('starter')
             geoService.findRoute($scope.origin,$scope.destination_coords.lat(),$scope.destination_coords.lng());
         };
 
-        $scope.town = null;
-        $scope.envelope = null;
-
         $scope.getWeather = function(){
             console.log("=== Weather ===");
-            console.log("Town: ",$scope.town);
-            console.log("Envelope: ",$scope.envelope);
-            weatherService.getWeather($scope.town,$scope.envelope);
+            console.log("Town: ",$scope.town.id);
+            console.log("Envelope: ",$scope.envelope.env);
+            weatherService.getWeather($scope.town.id,$scope.envelope.env);
         };
     }]);

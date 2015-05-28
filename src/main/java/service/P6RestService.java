@@ -27,13 +27,13 @@ import util.Towns;
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
 
-@Path("api")
+@Path("/")
 public class P6RestService {
 
     private static final Logger LOGGER = Grizzly.logger(P6RestService.class);
 
     @GET
-    @Path("weather/{city}/{envelope}")
+    @Path("/weather/{city}/{envelope}")
     @Produces("text/html")
     public String weatherService(@PathParam("city") int city, @PathParam("envelope") String envelope){
 
@@ -76,7 +76,7 @@ public class P6RestService {
     }
 
     @GET
-    @Path("towns")
+    @Path("/towns")
     @Produces("application/json")
     public Towns getTowns(){
         return new Towns();

@@ -18,11 +18,11 @@ public class P6Server {
         LOGGER.setLevel(Level.FINER);
 
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(
-                URI.create("http://localhost:9000/") ,
-                new ResourceConfig().register(P6RestService.class));
+                URI.create("http://localhost:8080/bizi") ,
+                new ResourceConfig().register(P6RestService.class).register(CrossDomainFilter.class));
         try {
             server.start();
-            LOGGER.info("server running @ http://localhost:9000/");
+            LOGGER.info("server running @ http://localhost:8080/bizi");
             LOGGER.info("Press 's' to shutdown now the server...");
             while(true){
                 int c = System.in.read();
