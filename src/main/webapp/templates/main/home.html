@@ -1,0 +1,68 @@
+<navbar></navbar>
+
+<div class="container margin-to-navbar height-90">
+    <div class="row height-90">
+        <div class="col-md-2">
+            <div class="custom-jumbo">
+                <form ng-submit="findRoute()">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </div>
+                        <input class="form-control" type="text" ng-model="origin" placeholder="Origin">
+                    </div>
+                    <br>
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                        </div>
+                        <input class="form-control" type="text" ng-model="destination" placeholder="Destination">
+                    </div>
+                    <br>
+                    <button class="btn btn-block btn-primary" type="submit">Route me!</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-7 height-100">
+            <div class="custom-jumbo height-100">
+                <div id="map"></div>
+            </div>
+        </div>
+        <div class="col-md-3 height-100">
+            <div class="custom-jumbo height-100">
+                <div class="height-70 weather-box">
+                    <div id="weather" class="height-100 weather-style">
+                        :D
+                    </div>
+                </div>
+                <div class="height-30">
+                    <form ng-submit="getWeather()">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-globe"></span>
+                            </div>
+                            <select class="form-control" ng-format="town">
+                                <option>Derp</option>
+                                <option>Foobar</option>
+                            </select>
+                        </div>
+                        <br>
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </div>
+                            <select class="form-control" ng-format="envelope">
+                                <option>JSON</option>
+                                <option>XML</option>
+                            </select>
+                        </div>
+                        <br>
+                        <button class="btn btn-block btn-primary" type="submit">Get weather!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
