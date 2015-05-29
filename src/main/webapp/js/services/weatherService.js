@@ -16,7 +16,7 @@ angular.module('starter')
             $http.get(API.URL+API.TOWNS)
                 .success(function(data){
                     $scope.towns = data.towns;
-                    $scope.town = $scope.towns[0];
+                    $scope.town = $scope.towns[291];
                     getWeather({id: 50297, town: 'Zaragoza'},"JSON");
                 });
         };
@@ -25,7 +25,7 @@ angular.module('starter')
             $http.get(API.URL+API.WEATHER+town.id+"/"+env)
                 .success(function(data){
                     console.log(data);
-                    document.getElementById('town').innerHTML = town.town;
+                    //document.getElementById('town').innerHTML = town.town;
                     document.getElementById('weather').innerHTML = data;
                 });
         };
