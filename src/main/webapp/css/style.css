@@ -20,6 +20,10 @@ ui-view > div.container {
     width: 100%;
 }
 
+.height-10 {
+    height: 10%;
+}
+
 .height-30 {
     height: 30%;
 }
@@ -46,7 +50,26 @@ ui-view > div.container {
 
 .weather-style {
     border-radius: 10px;
-    background-color: paleturquoise;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.weather-table {
+    width: 100%;
+    height: 100%;
+}
+
+th, thead {
+    background-color: #337ab7;
+}
+
+td, th {
+    text-align: center;
+}
+
+div.weather-style table {
+    width: 100%;
+    height: 100%;
 }
 
 #map {

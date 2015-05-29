@@ -37,7 +37,25 @@ dependencies {
 task start(type: JavaExec) {
     standardInput 	= System.in
     group 			= 'Forecast Service'
-    description 	= 'STW-P6 Rest service @ http://localhost:9000/'
+    description 	= 'STW-P6 Rest service @ http://localhost:8080/'
     main 			= 'main.P6Server'
     classpath 		= sourceSets.main.runtimeClasspath
+}
+
+task deployAxisService(type: JavaExec) {
+    standardInput   = System.in
+    group           = 'Forecase Service'
+    description     = 'STW-P6 Soap service deploy'
+    main            = 'org.apache.axis.client.AdminClient'
+    classpath       = sourceSets.main.runtimeClasspath
+    args('deploy.wsdd')
+}
+
+task undeployAxisService(type: JavaExec) {
+    standardInput   = System.in
+    group           = 'Forecase Service'
+    description     = 'STW-P6 Soap service undeploy'
+    main            = 'org.apache.axis.client.AdminClient'
+    classpath       = sourceSets.main.runtimeClasspath
+    args('undeploy.wsdd')
 }
