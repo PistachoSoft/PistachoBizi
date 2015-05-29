@@ -1,11 +1,11 @@
-/*.margin-to-navbar {*/
-    /*margin-top: 75px;*/
-/*}*/
-
-html,body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+body {
+    padding-top: 30px;
 }
 
 .custom-jumbo {
@@ -18,6 +18,10 @@ html,body {
 ui-view > div.container {
     margin: 0;
     width: 100%;
+}
+
+.height-10 {
+    height: 10%;
 }
 
 .height-30 {
@@ -46,9 +50,42 @@ ui-view > div.container {
 
 .weather-style {
     border-radius: 10px;
-    background-color: paleturquoise;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.weather-table {
+    width: 100%;
+    height: 100%;
+}
+
+th, thead {
+    background-color: #337ab7;
+}
+
+td, th {
+    text-align: center;
+}
+
+th {
+    border: none;
+}
+
+td {
+    border: 1px solid black;
+}
+
+div.weather-style table {
+    width: 100%;
+    height: 100%;
 }
 
 #map {
     height: 100%;
+}
+
+@media(max-width: 777px){
+    footer {
+        display: none;
+    }
 }

@@ -11,7 +11,8 @@ angular.module('starter')
             start: start,
             createAutocomplete: createAutocomplete,
             placeBizis: placeBizis,
-            findRoute: findRoute
+            findRoute: findRoute,
+            geolocate: geolocate
         });
 
         function start(){
@@ -89,7 +90,7 @@ angular.module('starter')
             var directionsService = new google.maps.DirectionsService();
             var request = {
                 origin:origin,
-                destination:new google.maps.LatLng(dest_lat,dest_lng),
+                destination: new google.maps.LatLng(dest_lat,dest_lng),
                 travelMode: google.maps.TravelMode.WALKING
             };
             directionsService.route(request, function(response, status) {
@@ -120,7 +121,12 @@ angular.module('starter')
                         position.coords.longitude);
 
                     $scope.destination_coords = pos;
-                    //map.setCenter(pos);
+                    var infowindow = new google.maps.InfoWindow({
+                        map: map,
+                        position: pos,
+                        content: 'Location found using HTML5.'
+                    });
+                    map.setCenter(pos);
                 }, function() {
                     console.log("HAHA NO GEOLOCATION 4 U PUSSY");
                 });

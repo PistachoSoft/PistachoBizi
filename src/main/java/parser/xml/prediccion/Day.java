@@ -239,7 +239,7 @@ public class Day {
      * @return
      */
     public Element genTempHTML() {
-        return new Element("th").setAttribute("colspan", Integer.toString(periods.size()))
+        return new Element("td").setAttribute("colspan", Integer.toString(periods.size()))
                 .setText(temperature.min + "/" + temperature.max);
     }
 

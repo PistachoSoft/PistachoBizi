@@ -40,6 +40,10 @@ angular.module('starter')
             console.log("=== Weather ===");
             console.log("Town: ",$scope.town.id);
             console.log("Envelope: ",$scope.envelope.env);
-            weatherService.getWeather($scope.town.id,$scope.envelope.env);
+            weatherService.getWeather($scope.town,$scope.envelope.env);
+        };
+
+        $scope.geolocate = function(){
+            geoService.geolocate($scope);
         };
     }]);

@@ -62,27 +62,27 @@ public class Period {
 
     public Element genSkyHTML() {
         if(sky == null){
-            return new Element("th").setText("");
+            return new Element("td").setText("");
         }
-        return new Element("th").addContent(new Element("img").setAttribute("src", "http://www.aemet.es/imagenes/gif/estado_cielo/" + sky.getValue() + ".gif"));
+        return new Element("td").addContent(new Element("img").setAttribute("src", "http://www.aemet.es/imagenes/gif/estado_cielo/" + sky.getValue() + ".gif"));
     }
 
     public Element genRainHTML() {
-        return new Element("th").setText(rain + "%");
+        return new Element("td").setText(rain + "%");
     }
 
     public Element genSnowHTML() {
-        return new Element("th").setText(Integer.toString(snow));
+        return new Element("td").setText(Integer.toString(snow));
     }
 
     public Element genWindHTML() {
         if(sky == null){
-            return new Element("th").setText("");
+            return new Element("td").setText("");
         }
-        return new Element("th").addContent(new Element("img").setAttribute("src","http://www.aemet.es/imagenes/gif/iconos_viento/"+wind.getDirection()+".gif"));
+        return new Element("td").addContent(new Element("img").setAttribute("src","http://www.aemet.es/imagenes/gif/iconos_viento/"+wind.getDirection()+".gif"));
     }
 
     public Element genWindSpeedHTML() {
-        return new Element("th").setText(Integer.toString(wind.getSpeed()));
+        return new Element("td").setText(Integer.toString(wind.getSpeed()));
     }
 }

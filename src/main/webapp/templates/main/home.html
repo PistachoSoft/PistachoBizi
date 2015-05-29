@@ -3,13 +3,18 @@
 <div class="container margin-to-navbar height-90">
     <div class="row height-90">
         <div class="col-md-3">
-            <div class="custom-jumbo">
+            <div class="jumbotron">
                 <form ng-submit="findRoute()">
                     <div class="input-group">
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-log-out"></span>
                         </div>
                         <input class="form-control" type="text" id="origin" ng-model="origin" placeholder="Origin" g-places-autocomplete>
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" ng-click="geolocate()">
+                                <span class="glyphicon glyphicon-screenshot"></span>
+                            </button>
+                        </div>
                     </div>
                     <br>
 
@@ -25,14 +30,17 @@
             </div>
         </div>
         <div class="col-md-6 height-100">
-            <div class="custom-jumbo height-100">
+            <div class="jumbotron height-100">
                 <div id="map"></div>
             </div>
         </div>
         <div class="col-md-3 height-100">
-            <div class="custom-jumbo height-100">
+            <div class="jumbotron height-100">
                 <div class="height-70 weather-box">
-                    <div id="weather" class="height-100 weather-style">
+                    <div id="town" class="height-10">
+                        Town
+                    </div>
+                    <div id="weather" class="height-90 weather-style">
                         :D
                     </div>
                 </div>
@@ -58,7 +66,6 @@
                                 <option>XML</option>
                             </select>
                         </div>
-                        <br>
                         <button class="btn btn-block btn-primary" type="submit">Get weather!</button>
                     </form>
                 </div>
@@ -66,3 +73,11 @@
         </div>
     </div>
 </div>
+
+<footer class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-header text-center">
+            <p class="navbar-brand">PistachoBizi belongs to PistachoSoft™</p>
+        </div>
+    </div>
+</footer>
