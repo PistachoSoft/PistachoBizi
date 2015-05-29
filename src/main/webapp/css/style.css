@@ -1,11 +1,11 @@
-/*.margin-to-navbar {*/
-    /*margin-top: 75px;*/
-/*}*/
-
-html,body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+body {
+    padding-top: 30px;
 }
 
 .custom-jumbo {
@@ -67,6 +67,14 @@ td, th {
     text-align: center;
 }
 
+th {
+    border: none;
+}
+
+td {
+    border: 1px solid black;
+}
+
 div.weather-style table {
     width: 100%;
     height: 100%;
@@ -74,4 +82,10 @@ div.weather-style table {
 
 #map {
     height: 100%;
+}
+
+@media(max-width: 777px){
+    footer {
+        display: none;
+    }
 }

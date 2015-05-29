@@ -42,4 +42,8 @@ angular.module('starter')
             console.log("Envelope: ",$scope.envelope.env);
             weatherService.getWeather($scope.town,$scope.envelope.env);
         };
+
+        $scope.geolocate = function(){
+            geoService.geolocate($scope);
+        };
     }]);
