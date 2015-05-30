@@ -1,6 +1,6 @@
 {
   "name": "PistachoBizi",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/PistachoSoft/PistachoBizi",
   "authors": [
     "RecuencoJones <david.recuencogadea@gmail.com>"
@@ -15,9 +15,10 @@
     "tests"
   ],
   "dependencies": {
-    "angular-bootstrap": "~0.13.0",
-    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.4",
     "angular": "~1.4.0",
-    "bootstrap": "~3.3.4"
+    "angular-ui-router": "~0.2.15",
+    "angular-bootstrap": "~0.13.0",
+    "bootstrap-material-design": "~0.3.0"
   }
 }

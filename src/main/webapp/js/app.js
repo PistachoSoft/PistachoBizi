@@ -3,15 +3,16 @@ angular.module('starter', ['ui.router', 'ui.bootstrap'])
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider
 
-            .state('starter', {
-                url: "/",
-                templateUrl: "index.html"
-            })
-
             .state('home', {
                 url: "/home",
                 templateUrl: "templates/main/home.html",
                 controller: "MainCtrl"
+            })
+
+            .state('stats', {
+                url: "/stats",
+                templateUrl: "templates/main/stats.html",
+                controller: "StatsCtrl"
             });
         
         $urlRouterProvider.otherwise('home');

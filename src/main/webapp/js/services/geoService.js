@@ -64,15 +64,11 @@ angular.module('starter')
                         };
                     });
                     map.data.addListener('click', function(event) {
-                        //console.log(event.feature);
-                        //console.log(event.feature.getGeometry().get());
-                        //console.log(event.feature.getProperty("id"));
-                        //console.log(event.feature.getProperty("title"));
                         $scope.destination = event.feature.getProperty("title");
                         $scope.destination_coords = event.feature.getGeometry().get();
                         $scope.$apply();
                         infowindow.setContent(
-                            "<ul>"+
+                            "<ul class='infobizi'>"+
                             "<li>"+event.feature.getProperty("title")+"</li>"+
                             "<li>"+"Bicis: "+event.feature.getProperty("bicisDisponibles")+"</li>"+
                             "<li>"+"Huecos: "+event.feature.getProperty("anclajesDisponibles")+"</li>"+
@@ -98,20 +94,6 @@ angular.module('starter')
                     directionsDisplay.setDirections(response);
                 }
             });
-            /*$http.get(
-                "https://maps.googleapis.com/maps/api/directions/json?" +
-                "origin=" + origin +
-                "&destination=" + dest_lat + "," + dest_lng +
-                "&key="+API.KEY,
-                {
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    }
-                }
-            )
-                .success(function (data) {
-                    console.log(data);
-                });*/
         };
 
         function geolocate($scope){
@@ -120,11 +102,12 @@ angular.module('starter')
                     var pos = new google.maps.LatLng(position.coords.latitude,
                         position.coords.longitude);
 
-                    $scope.destination_coords = pos;
+                    $scope.origin = position.coords.latitude+","+position.coords.longitude;
+                    $scope.$apply();
                     var infowindow = new google.maps.InfoWindow({
                         map: map,
                         position: pos,
-                        content: 'Location found using HTML5.'
+                        content: 'You are here!'
                     });
                     map.setCenter(pos);
                 }, function() {

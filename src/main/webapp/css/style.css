@@ -80,6 +80,11 @@ div.weather-style table {
     height: 100%;
 }
 
+.infobizi {
+    list-style-type: none;
+    padding-left: 0;
+}
+
 #map {
     height: 100%;
 }
