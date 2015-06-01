@@ -11,9 +11,9 @@
                         </div>
                         <input class="form-control" type="text" id="origin" ng-model="origin" placeholder="Origin" g-places-autocomplete>
                         <div class="input-group-btn">
-                            <button class="btn btn-primary" ng-click="geolocate()" title="Geolocation">
+                            <a class="btn btn-primary" ng-click="geolocate()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Geolocate!">
                                 <span class="glyphicon glyphicon-screenshot"></span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <br>
@@ -29,8 +29,6 @@
                             <span class="glyphicon glyphicon-envelope"></span>
                         </div>
                         <select class="form-control" ng-model="infEnvelope" ng-options="e.env for e in envelopes">
-                            <!--<option>JSON</option>-->
-                            <!--<option>XML</option>-->
                         </select>
                     </div>
                     <br>
@@ -46,9 +44,6 @@
         <div class="col-md-3 height-100">
             <div class="jumbotron height-100">
                 <div class="height-70 weather-box">
-                    <!--<div id="town" class="height-10">-->
-                        <!--Town-->
-                    <!--</div>-->
                     <div id="weather" class="height-100 weather-style">
                         :D
                     </div>
@@ -60,8 +55,6 @@
                                 <span class="glyphicon glyphicon-globe"></span>
                             </div>
                             <select class="form-control" ng-model="town" ng-options="t.town for t in towns">
-                                <!--<option>Derp</option>-->
-                                <!--<option>Foobar</option>-->
                             </select>
                         </div>
                         <br>
@@ -71,8 +64,6 @@
                                 <span class="glyphicon glyphicon-envelope"></span>
                             </div>
                             <select class="form-control" ng-model="weaEnvelope" ng-options="e.env for e in envelopes">
-                                <!--<option>JSON</option>-->
-                                <!--<option>XML</option>-->
                             </select>
                         </div>
                         <button class="btn btn-block btn-primary" type="submit">Get weather!</button>

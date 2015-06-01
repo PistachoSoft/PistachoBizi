@@ -108,11 +108,14 @@ angular.module('pistachoBizi')
 
                     $scope.origin = position.coords.latitude+","+position.coords.longitude;
                     $scope.$apply();
-                    var infowindow = new google.maps.InfoWindow({
-                        map: map,
-                        position: pos,
-                        content: 'You are here!'
-                    });
+                    //infowindow = new google.maps.InfoWindow({
+                    //    map: map,
+                    //    position: pos,
+                    //    content: 'You are here!'
+                    //});
+                    infowindow.setContent('You are here!');
+                    infowindow.setPosition(pos);
+                    infowindow.open(map);
                     map.setCenter(pos);
                 }, function() {
                     console.log("HAHA NO GEOLOCATION 4 U PUSSY");

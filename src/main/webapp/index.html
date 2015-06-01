@@ -15,7 +15,6 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>-->
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9RPylLn5DtBKnmFoSLLvNcRdnHCGmAKg&libraries=places">
     </script>
@@ -28,12 +27,6 @@
 
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
-    <script>
-        $(function() {
-            // This command is used to initialize some elements and make them work properly
-            $.material.init();
-        });
-    </script>
 
     <script src="js/app.js"></script>
     <script src="js/controllers/mainController.js"></script>
@@ -49,5 +42,15 @@
 </head>
 <body ng-app="pistachoBizi">
 <ui-view></ui-view>
+
+<script type="text/javascript">
+    $(function () {
+        // This command is used to initialize some elements and make them work properly
+        $.material.init();
+    });
+    $(document).ready(function () {
+        $("body").tooltip({selector: '[data-toggle=tooltip]'});
+    });
+</script>
 </body>
 </html>
