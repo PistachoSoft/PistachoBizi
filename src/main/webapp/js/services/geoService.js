@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('pistachoBizi')
 
     .service('geoService', ['$http', 'API', function($http, API){
 
@@ -11,6 +11,7 @@ angular.module('starter')
             start: start,
             createAutocomplete: createAutocomplete,
             placeBizis: placeBizis,
+            getInfoBizi: getInfoBizi,
             findRoute: findRoute,
             geolocate: geolocate
         });
@@ -39,7 +40,6 @@ angular.module('starter')
             google.maps.event.addListener(autocomplete, 'place_changed', function() {
                 var data = document.getElementById(id).value;
                 $scope.origin = data;
-                //console.log(data);
                 return false;
             });
         };
@@ -54,7 +54,6 @@ angular.module('starter')
                 }
             )
                 .success(function(data){
-                    console.log(data);
                     map.data.addGeoJson(data);
                     map.data.setStyle(function(feature) {
                         var icon = null;
@@ -65,21 +64,26 @@ angular.module('starter')
                     });
                     map.data.addListener('click', function(event) {
                         $scope.destination = event.feature.getProperty("title");
+                        $scope.destination_id = event.feature.getProperty("id");
                         $scope.destination_coords = event.feature.getGeometry().get();
                         $scope.$apply();
-                        infowindow.setContent(
-                            "<ul class='infobizi'>"+
-                            "<li>"+event.feature.getProperty("title")+"</li>"+
-                            "<li>"+"Bicis: "+event.feature.getProperty("bicisDisponibles")+"</li>"+
-                            "<li>"+"Huecos: "+event.feature.getProperty("anclajesDisponibles")+"</li>"+
-                            "<li>"+"Id: "+event.feature.getProperty("id")+"</li>"+
-                            "</ul>"
-                        );
-                        infowindow.setPosition(event.feature.getGeometry().get());
-                        infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
-                        infowindow.open(map);
+                        $scope.info(event);
                     });
                 });
+        };
+
+        function getInfoBizi(event, id, env) {
+            infowindow.setContent(
+                "<ul class='infobizi'>"+
+                "<li>"+event.feature.getProperty("title")+"</li>"+
+                "<li>"+"Bicis: "+event.feature.getProperty("bicisDisponibles")+"</li>"+
+                "<li>"+"Huecos: "+event.feature.getProperty("anclajesDisponibles")+"</li>"+
+                "<li>"+"Id: "+event.feature.getProperty("id")+"</li>"+
+                "</ul>"
+            );
+            infowindow.setPosition(event.feature.getGeometry().get());
+            infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+            infowindow.open(map);
         };
 
         function findRoute(origin, dest_lat, dest_lng) {

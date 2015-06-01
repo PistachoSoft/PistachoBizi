@@ -1,49 +1,64 @@
-angular.module('starter')
+angular.module('pistachoBizi')
 
-    .controller('MainCtrl', [ '$scope', 'geoService', 'weatherService', function($scope,geoService,weatherService){
+    .controller('MainCtrl', ['$scope', 'geoService', 'weatherService', 'statsService',
+        function ($scope, geoService, weatherService, statsService) {
 
-        geoService.start();
-        weatherService.start();
+            geoService.start();
+            weatherService.start();
 
-        //Gmaps vars
-        $scope.origin = null;
-        $scope.destination = null;
-        $scope.destination_coords = null;
+            //Gmaps vars
+            $scope.origin = null;
+            $scope.destination = null;
+            $scope.destination_id = null;
+            $scope.destination_coords = null;
 
-        //Weather vars
-        $scope.town = null;
-        $scope.towns = [];
-        $scope.envelopes = [
-            {
-                env: "JSON"
-            },
-            {
-                env: "XML"
-            }
-        ];
-        $scope.envelope = $scope.envelopes[0];
+            //Weather vars
+            $scope.town = null;
+            $scope.towns = [];
+            $scope.envelopes = [
+                {
+                    env: "JSON"
+                },
+                {
+                    env: "XML"
+                }
+            ];
+            $scope.weaEnvelope = $scope.envelopes[0];
+            $scope.infEnvelope = $scope.envelopes[0];
 
-        geoService.createAutocomplete($scope,'origin');
-        geoService.placeBizis($scope);
-        weatherService.getTowns($scope);
+            geoService.createAutocomplete($scope, 'origin');
+            geoService.placeBizis($scope);
+            weatherService.getTowns($scope);
 
-        $scope.findRoute = function(){
-            if($scope.origin==null) return;
-            if($scope.destination==null) return;
-            console.log("=== Routing ===");
-            console.log("Origin: ",$scope.origin);
-            console.log("Destination: ",$scope.destination);
-            geoService.findRoute($scope.origin,$scope.destination_coords.lat(),$scope.destination_coords.lng());
-        };
+            $scope.info = function (event) {
+                //console.log("=== Info ===");
+                //console.log("Id: ",$scope.destination_id);
+                //console.log("Envelope: ",$scope.infEnvelope.env);
+                geoService.getInfoBizi(event, $scope.destination_id, $scope.infEnvelope.env);
+                statsService.log(statsService.INF, {id: $scope.destination_id, env: $scope.infEnvelope.env});
+            };
 
-        $scope.getWeather = function(){
-            console.log("=== Weather ===");
-            console.log("Town: ",$scope.town.id);
-            console.log("Envelope: ",$scope.envelope.env);
-            weatherService.getWeather($scope.town,$scope.envelope.env);
-        };
+            $scope.findRoute = function () {
+                if ($scope.origin == null) return;
+                if ($scope.destination == null) return;
+                //console.log("=== Routing ===");
+                //console.log("Origin: ",$scope.origin);
+                //console.log("Destination: ",$scope.destination);
+                geoService.findRoute($scope.origin, $scope.destination_coords.lat(), $scope.destination_coords.lng());
+                statsService.log(statsService.ROU, {origin: $scope.origin, dest: $scope.destination_id});
+            };
 
-        $scope.geolocate = function(){
-            geoService.geolocate($scope);
-        };
-    }]);
+            $scope.getWeather = function () {
+                //console.log("=== Weather ===");
+                //console.log("Town: ",$scope.town.id);
+                //console.log("Envelope: ",$scope.weaEnvelope.env);
+                weatherService.getWeather($scope.town, $scope.weaEnvelope.env);
+                statsService.log(statsService.WEA, {town: $scope.town.id, env: $scope.weaEnvelope.env});
+            };
+
+            $scope.geolocate = function () {
+                //console.log("=== Geolocate ===");
+                geoService.geolocate($scope);
+                statsService.log(statsService.GEO, {});
+            };
+        }]);

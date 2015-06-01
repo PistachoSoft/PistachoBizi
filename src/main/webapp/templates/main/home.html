@@ -17,12 +17,21 @@
                         </div>
                     </div>
                     <br>
-
                     <div class="input-group">
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-log-in"></span>
                         </div>
                         <input class="form-control" type="text" id="destination" ng-model="destination" placeholder="Destination" readonly>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </div>
+                        <select class="form-control" ng-model="infEnvelope" ng-options="e.env for e in envelopes">
+                            <!--<option>JSON</option>-->
+                            <!--<option>XML</option>-->
+                        </select>
                     </div>
                     <br>
                     <button class="btn btn-block btn-primary" type="submit">Route me!</button>
@@ -61,9 +70,9 @@
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-envelope"></span>
                             </div>
-                            <select class="form-control" ng-model="envelope" ng-options="e.env for e in envelopes">
-                                <option>JSON</option>
-                                <option>XML</option>
+                            <select class="form-control" ng-model="weaEnvelope" ng-options="e.env for e in envelopes">
+                                <!--<option>JSON</option>-->
+                                <!--<option>XML</option>-->
                             </select>
                         </div>
                         <button class="btn btn-block btn-primary" type="submit">Get weather!</button>

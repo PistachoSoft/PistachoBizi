@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('pistachoBizi')
 
     .directive('navbar', function(){
         return {

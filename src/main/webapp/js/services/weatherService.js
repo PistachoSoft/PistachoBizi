@@ -1,6 +1,6 @@
-angular.module('starter')
+angular.module('pistachoBizi')
 
-    .service('weatherService', ['$http', 'API', function($http,API){
+    .service('weatherService', ['$http', 'API', function ($http, API) {
 
         return ({
             start: start,
@@ -8,24 +8,22 @@ angular.module('starter')
             getWeather: getWeather
         });
 
-        function start(){
+        function start() {
             document.getElementById('weather').innerHTML = "Soon™";
         };
 
-        function getTowns($scope){
-            $http.get(API.URL+API.TOWNS)
-                .success(function(data){
+        function getTowns($scope) {
+            $http.get(API.URL + API.TOWNS)
+                .success(function (data) {
                     $scope.towns = data.towns;
                     $scope.town = $scope.towns[291];
-                    getWeather({id: 50297, town: 'Zaragoza'},"JSON");
+                    getWeather({id: 50297, town: 'Zaragoza'}, "JSON");
                 });
         };
 
-        function getWeather(town,env){
-            $http.get(API.URL+API.WEATHER+town.id+"/"+env)
-                .success(function(data){
-                    console.log(data);
-                    //document.getElementById('town').innerHTML = town.town;
+        function getWeather(town, env) {
+            $http.get(API.URL + API.WEATHER + town.id + "/" + env)
+                .success(function (data) {
                     document.getElementById('weather').innerHTML = data;
                 });
         };

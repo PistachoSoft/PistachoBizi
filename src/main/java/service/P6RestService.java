@@ -2,26 +2,16 @@ package service;
 
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.axis.encoding.XMLType;
 import org.glassfish.grizzly.Grizzly;
-import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import javax.ws.rs.*;
-import java.io.IOException;
-import java.io.StringReader;
-import java.net.URI;
-import java.text.ParseException;
 import java.util.logging.Logger;
 
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
-import parser.xml.prediccion.Forecast;
 import util.Towns;
 
 import javax.xml.namespace.QName;

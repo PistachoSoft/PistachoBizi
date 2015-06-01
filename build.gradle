@@ -44,7 +44,7 @@ task start(type: JavaExec) {
 
 task deployAxisService(type: JavaExec) {
     standardInput   = System.in
-    group           = 'Forecase Service'
+    group           = 'Forecast Service'
     description     = 'STW-P6 Soap service deploy'
     main            = 'org.apache.axis.client.AdminClient'
     classpath       = sourceSets.main.runtimeClasspath
@@ -53,7 +53,7 @@ task deployAxisService(type: JavaExec) {
 
 task undeployAxisService(type: JavaExec) {
     standardInput   = System.in
-    group           = 'Forecase Service'
+    group           = 'Forecast Service'
     description     = 'STW-P6 Soap service undeploy'
     main            = 'org.apache.axis.client.AdminClient'
     classpath       = sourceSets.main.runtimeClasspath

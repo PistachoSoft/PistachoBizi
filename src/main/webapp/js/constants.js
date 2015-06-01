@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('pistachoBizi')
 
     .constant('API', {
         'KEY':'AIzaSyC9RPylLn5DtBKnmFoSLLvNcRdnHCGmAKg',
