@@ -1,4 +1,4 @@
-angular.module('pistachoBizi', ['ui.router', 'ui.bootstrap'])
+angular.module('pistachoBizi', ['ui.router', 'ui.bootstrap', 'chart.js'])
 
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider

@@ -24,6 +24,10 @@ ui-view > div.container {
     width: 100%;
 }
 
+ui-view > div.container.stats-container {
+    margin-bottom: 350px;
+}
+
 .height-10 {
     height: 10%;
 }

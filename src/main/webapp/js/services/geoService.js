@@ -73,17 +73,37 @@ angular.module('pistachoBizi')
         };
 
         function getInfoBizi(event, id, env) {
-            infowindow.setContent(
-                "<ul class='infobizi'>"+
-                "<li>"+event.feature.getProperty("title")+"</li>"+
-                "<li>"+"Bicis: "+event.feature.getProperty("bicisDisponibles")+"</li>"+
-                "<li>"+"Huecos: "+event.feature.getProperty("anclajesDisponibles")+"</li>"+
-                "<li>"+"Id: "+event.feature.getProperty("id")+"</li>"+
-                "</ul>"
-            );
-            infowindow.setPosition(event.feature.getGeometry().get());
-            infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
-            infowindow.open(map);
+            if(env == "JSON") {
+                $http.get(API.BIZI + id + '.' + 'json' + API.BIZI_END).success(function (data) {
+                    infowindow.setContent(
+                        "<ul class='infobizi'>" +
+                        "<li>" + data.title + "</li>" +
+                        "<li>" + "Bicis: " + data.bicisDisponibles + "</li>" +
+                        "<li>" + "Huecos: " + data.anclajesDisponibles + "</li>" +
+                        "<li>" + "Id: " + data.id + "</li>" +
+                        "</ul>"
+                    );
+                    infowindow.setPosition(event.feature.getGeometry().get());
+                    infowindow.setOptions({pixelOffset: new google.maps.Size(0, -30)});
+                    infowindow.open(map);
+                });
+            }else {
+                $http.get(API.BIZI + id + '.' + 'xml' + API.BIZI_END).success(function (data) {
+                    var xml = $.parseXML(data);
+                    var parsed = $(xml);
+                    infowindow.setContent(
+                        "<ul class='infobizi'>" +
+                        "<li>" + parsed.find('title').text() + "</li>" +
+                        "<li>" + "Bicis: " + parsed.find('bicisDisponibles').text() + "</li>" +
+                        "<li>" + "Huecos: " + parsed.find('anclajesDisponibles').text() + "</li>" +
+                        "<li>" + "Id: " + parsed.find('id').text() + "</li>" +
+                        "</ul>"
+                    );
+                    infowindow.setPosition(event.feature.getGeometry().get());
+                    infowindow.setOptions({pixelOffset: new google.maps.Size(0, -30)});
+                    infowindow.open(map);
+                });
+            }
         };
 
         function findRoute(origin, dest_lat, dest_lng) {

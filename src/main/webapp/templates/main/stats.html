@@ -1,13 +1,36 @@
 <navbar></navbar>
 
-<div class="container margin-to-navbar height-90">
-
+<div class="container stats-container margin-to-navbar height-90">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <canvas id="bar1" class="chart chart-bar" data="data" labels="labels"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <canvas id="pie1" class="chart chart-pie" data="data2" labels="labels2"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <canvas id="bar3" class="chart chart-bar" data="data" labels="labels"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <canvas id="bar4" class="chart chart-bar" data="data" labels="labels"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 
 <footer class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-header text-center">
-            <p class="navbar-brand">PistachoBizi belongs to PistachoSoft™</p>
+            <p class="navbar-brand" style="margin-bottom: 0">PistachoBizi belongs to PistachoSoft™</p>
         </div>
     </div>
 </footer>
