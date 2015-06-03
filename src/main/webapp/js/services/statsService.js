@@ -23,9 +23,8 @@ angular.module('pistachoBizi')
 
             $http.post(API.STATS,JSON.stringify(tmp))
                 .success(function(data){
-
+                    console.log(tmp);
                 });
-            console.log(tmp);
         }
 
         function geolocate() {
