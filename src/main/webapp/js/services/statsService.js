@@ -21,7 +21,7 @@ angular.module('pistachoBizi')
                 browser: browserify()
             };
 
-            $http.post(API.STATS,JSON.stringify(tmp))
+            $http.post(API.URL + API.STATS,JSON.stringify(tmp))
                 .success(function(data){
                     console.log(tmp);
                 });
