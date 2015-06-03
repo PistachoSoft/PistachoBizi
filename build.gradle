@@ -19,7 +19,8 @@ dependencies {
 
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.code.gson:gson:2.2.4',
-            'org.jdom:jdom2:2.0.6'
+            'org.jdom:jdom2:2.0.6',
+            'javax.servlet:servlet-api:2.5'
 
 //    Axis stuff
     compile 'commons-discovery:commons-discovery:0.2'

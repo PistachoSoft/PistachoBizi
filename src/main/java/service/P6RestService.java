@@ -7,13 +7,16 @@ import org.glassfish.grizzly.Grizzly;
 import org.jdom2.Element;
 import org.jdom2.output.XMLOutputter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import java.util.logging.Logger;
 
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
+import util.Stats;
 import util.Towns;
 
+import javax.ws.rs.core.Context;
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
 
@@ -70,5 +73,12 @@ public class P6RestService {
     @Produces("application/json")
     public Towns getTowns(){
         return new Towns();
+    }
+
+    @POST
+    @Path("/stats")
+    @Consumes("application/json")
+    public void logStats(@Context HttpServletRequest httpServletRequest, Stats stats) {
+
     }
 }

@@ -6,7 +6,8 @@ angular.module('pistachoBizi')
         'BIZIS': 'http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/estacion-bicicleta?srsname=wgs84&start=0&rows=500',
         'BIZI': 'http://www.zaragoza.es/api/recurso/urbanismo-infraestructuras/estacion-bicicleta/',
         'BIZI_END': '?srsname=wgs84',
-        'URL': 'http://localhost:8080/bizi/api',
+        'URL': 'http://'+location.host+'/bizi/api',
         'TOWNS': '/towns',
-        'WEATHER': '/weather/'
+        'WEATHER': '/weather/',
+        'STATS': '/stats'
     });
