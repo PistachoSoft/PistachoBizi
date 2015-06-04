@@ -93,7 +93,7 @@ div.weather-style table {
     padding-left: 0;
 }
 
-#map {
+#map, #heatmap {
     height: 100%;
 }
 

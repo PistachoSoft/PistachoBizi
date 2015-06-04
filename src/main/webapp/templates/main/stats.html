@@ -4,6 +4,28 @@
     <div class="row">
         <div class="col-md-6">
             <div class="jumbotron">
+                <p>Method requests</p>
+                <canvas class="chart chart-bar" data="methods_data" labels="methods_labels"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <p>Envelope requests</p>
+                <canvas class="chart chart-bar" data="env_data" labels="env_labels"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="jumbotron">
+                <p>Browser requests</p>
+                <canvas class="chart chart-pie" data="browser_data" labels="browser_labels"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="jumbotron">
                 <p>Most info requested on stations</p>
                 <canvas class="chart chart-pie" data="stations_info_data" labels="stations_info"></canvas>
             </div>
@@ -38,15 +60,15 @@
         <div class="col-md-6">
             <div class="jumbotron">
                 <p>Ranking of stations by route requests</p>
-                <ul>
+                <ol>
                     <li ng-repeat="rank in stations_route_ranking | orderBy: '-data' | limitTo: 10">
                         Station {{rank.station}}
                     </li>
-                </ul>
+                </ol>
             </div>
         </div>
     </div>
-    <div class="row" style="padding-bottom: 100px">
+    <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <div class="jumbotron">
                 <p>Route requests by week day</p>
@@ -54,6 +76,16 @@
             </div>
         </div>
     </div>
+    <div class="row" style="padding-bottom: 100px">
+        <!--<div class="col-md-offset-3 col-md-6">
+            <div class="jumbotron">
+                <p>Route destinations heatmap</p>
+
+                <div id="heatmap" style="height: 400px"></div>
+            </div>
+        </div>-->
+    </div>
+</div>
 </div>
 
 <footer class="navbar navbar-inverse navbar-fixed-bottom">

@@ -2,6 +2,9 @@ angular.module('pistachoBizi')
 
     .service('statsService', ['$http', 'API', function($http,API){
 
+        var mapOptions;
+        var map;
+
         return ({
             //constants
             GEO: 'geolocation',
@@ -10,19 +13,21 @@ angular.module('pistachoBizi')
             INF: 'info',
             //functions
             log: log,
+            loadGeneral: loadGeneral,
             loadInfo: loadInfo,
             loadRoute: loadRoute,
             loadInfoDays: loadInfoDays,
-            loadRouteDays: loadRouteDays
+            loadRouteDays: loadRouteDays,
+            loadHeatMap: loadHeatMap
         });
 
         function log(method, params) {
 
             var tmp = {
                 method: method,
-                params: params,
+                params: params//,
                 //location: geolocate(),
-                browser: browserify()
+                //browser: browserify()
             };
 
             $http.post(API.URL + API.STATS,JSON.stringify(tmp))
@@ -31,12 +36,36 @@ angular.module('pistachoBizi')
                 });
         }
 
+        function loadGeneral($scope) {
+
+            $http.get('data/dataMethods.json').success(function(data){
+                $scope.methods_data.push(data.stats.geolocation);
+                $scope.methods_data.push(data.stats.info);
+                $scope.methods_data.push(data.stats.route);
+                $scope.methods_data.push(data.stats.weather);
+                $scope.methods_data = [$scope.methods_data];
+            });
+
+            $http.get('data/dataEnvelopes.json').success(function(data){
+                $scope.env_data.push(data.stats.json);
+                $scope.env_data.push(data.stats.xml);
+                $scope.env_data = [$scope.env_data];
+            });
+
+            $http.get('data/dataBrowsers.json').success(function(data){
+                for(var i = 0; i < data.stats.length; i++){
+                    $scope.browser_labels.push(data.stats[i].browser);
+                    $scope.browser_data.push(data.stats[i].number);
+                }
+            });
+        }
+
         function loadInfo($scope) {
 
             $http.get('data/data1.json').success(function(data){
                 $scope.stations_info_ranking = data.stats;
                 for(var i = 0; i < data.stats.length; i++){
-                    $scope.stations_info.push('Station '+data.stats[i].station);
+                    $scope.stations_info.push(data.stats[i].station);
                     $scope.stations_info_data.push(data.stats[i].data);
                 }
             });
@@ -47,7 +76,7 @@ angular.module('pistachoBizi')
             $http.get('data/data2.json').success(function(data){
                 $scope.stations_route_ranking = data.stats;
                 for(var i = 0; i < data.stats.length; i++){
-                    $scope.stations_route.push('Station '+data.stats[i].station);
+                    $scope.stations_route.push(data.stats[i].station);
                     $scope.stations_route_data.push(data.stats[i].data);
                 }
             });
@@ -68,6 +97,25 @@ angular.module('pistachoBizi')
                     $scope.days_route_data.push(data.stats[i].number);
                 }
                 $scope.days_route_data = [$scope.days_route_data];
+            });
+        }
+
+        function loadHeatMap(){
+            mapOptions = {
+                center: { lat: 41.6590394, lng: -0.8745309},
+                zoom: 14
+            };
+            map = new google.maps.Map(document.getElementById('heatmap'), mapOptions);
+
+            $http.get('data/data5.json').success(function(data) {
+
+                var pointArray = new google.maps.MVCArray(data.pos);
+
+                var heatmap = new google.maps.visualization.HeatmapLayer({
+                    data: pointArray
+                });
+
+                heatmap.setMap(map);
             });
         }
 

@@ -35,7 +35,11 @@ angular.module('pistachoBizi')
                 //console.log("Id: ",$scope.destination_id);
                 //console.log("Envelope: ",$scope.infEnvelope.env);
                 geoService.getInfoBizi(event, $scope.destination_id, $scope.infEnvelope.env);
-                statsService.log(statsService.INF, {id: $scope.destination_id, env: $scope.infEnvelope.env});
+                statsService.log(statsService.INF,
+                    {
+                        dest: $scope.destination + " [" + $scope.destination_id + "]",
+                        env: $scope.infEnvelope.env
+                    });
             };
 
             $scope.findRoute = function () {
@@ -45,7 +49,13 @@ angular.module('pistachoBizi')
                 //console.log("Origin: ",$scope.origin);
                 //console.log("Destination: ",$scope.destination);
                 geoService.findRoute($scope.origin, $scope.destination_coords.lat(), $scope.destination_coords.lng());
-                statsService.log(statsService.ROU, {origin: $scope.origin, dest: $scope.destination_id});
+                //var origin_coords = $scope.origin.split(',');
+                statsService.log(statsService.ROU,
+                    {
+                        lat: $scope.destination_coords.lat(),
+                        lng: $scope.destination_coords.lng(),
+                        dest: $scope.destination + " [" + $scope.destination_id + "]"
+                    });
             };
 
             $scope.getWeather = function () {
@@ -53,7 +63,7 @@ angular.module('pistachoBizi')
                 //console.log("Town: ",$scope.town.id);
                 //console.log("Envelope: ",$scope.weaEnvelope.env);
                 weatherService.getWeather($scope.town, $scope.weaEnvelope.env);
-                statsService.log(statsService.WEA, {town: $scope.town.id, env: $scope.weaEnvelope.env});
+                statsService.log(statsService.WEA, {id: $scope.town.id, env: $scope.weaEnvelope.env});
             };
 
             $scope.geolocate = function () {

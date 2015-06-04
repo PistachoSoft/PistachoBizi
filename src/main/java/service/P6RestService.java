@@ -11,6 +11,7 @@ import org.glassfish.grizzly.http.server.Request;
 import org.jdom2.Element;
 import org.jdom2.output.XMLOutputter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -93,7 +94,7 @@ public class P6RestService {
     @Consumes("application/json")
     public Response logStats(Stats stats,
                              @HeaderParam("user-agent") String userAgentString,
-                             @Context Request request) {
+                             @Context HttpServletRequest request) {
 
         LOGGER.info("stats: " + stats + ", request by: " + request.getRemoteAddr());
 

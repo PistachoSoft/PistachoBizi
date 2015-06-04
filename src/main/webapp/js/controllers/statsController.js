@@ -14,6 +14,12 @@ angular.module('pistachoBizi')
 
         //most info requested stations
 
+        $scope.methods_labels = [statsService.GEO, statsService.INF, statsService.ROU, statsService.WEA];
+        $scope.env_labels = ["JSON", "XML"];
+        $scope.methods_data = [];
+        $scope.env_data = [];
+        $scope.browser_labels = [];
+        $scope.browser_data = [];
         $scope.stations_info = [];
         $scope.stations_route = [];
         $scope.stations_info_data = [];
@@ -26,9 +32,11 @@ angular.module('pistachoBizi')
         $scope.days_route_data = [];
 
         //load data
+        statsService.loadGeneral($scope);
         statsService.loadInfo($scope);
         statsService.loadRoute($scope);
         statsService.loadInfoDays($scope);
         statsService.loadRouteDays($scope);
+        //statsService.loadHeatMap();
 
     }]);

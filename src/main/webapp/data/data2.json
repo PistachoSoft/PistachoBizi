@@ -1,51 +1,51 @@
 {
   "stats": [
     {
-      "station": 1,
+      "station": "Name of station [1]",
       "data": 54
     },
     {
-      "station": 2,
+      "station": "Name of station [2]",
       "data": 889
     },
     {
-      "station": 3,
+      "station": "Name of station [3]",
       "data": 764
     },
     {
-      "station": 4,
+      "station": "Name of station [4]",
       "data": 656
     },
     {
-      "station": 5,
+      "station": "Name of station [5]",
       "data": 536
     },
     {
-      "station": 6,
+      "station": "Name of station [6]",
       "data": 646
     },
     {
-      "station": 7,
+      "station": "Name of station [7]",
       "data": 2873
     },
     {
-      "station": 8,
+      "station": "Name of station [8]",
       "data": 785
     },
     {
-      "station": 9,
+      "station": "Name of station [9]",
       "data": 527
     },
     {
-      "station": 10,
+      "station": "Name of station [10]",
       "data": 763
     },
     {
-      "station": 11,
+      "station": "Name of station [11]",
       "data": 321
     },
     {
-      "station": 12,
+      "station": "Name of station [12]",
       "data": 8644
     }
   ]

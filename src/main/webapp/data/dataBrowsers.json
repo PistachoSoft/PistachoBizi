@@ -1,0 +1,24 @@
+{
+  "stats": [
+    {
+      "browser": "Chrome",
+      "number": 5000
+    },
+    {
+      "browser": "Firefox",
+      "number": 4000
+    },
+    {
+      "browser": "Safari",
+      "number": 3000
+    },
+    {
+      "browser": "Opera",
+      "number": 2000
+    },
+    {
+      "browser": "Internet Explorer",
+      "number": 100
+    }
+  ]
+}
