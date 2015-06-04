@@ -2,34 +2,31 @@ package service;
 
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import eu.bitwalker.useragentutils.UserAgent;
+import org.apache.axis.client.Call;
+import org.apache.axis.client.Service;
 import org.apache.axis.encoding.XMLType;
 import org.glassfish.grizzly.Grizzly;
 import org.glassfish.grizzly.http.server.Request;
 import org.jdom2.Element;
 import org.jdom2.output.XMLOutputter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import util.ParseInput;
-import util.Stats;
-import util.Towns;
+import util.*;
 
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
+import java.util.*;
+import java.util.logging.Logger;
 
 @Path("/")
 public class P6RestService {
@@ -46,7 +43,7 @@ public class P6RestService {
 
         LOGGER.info("Request: " + city + "," + envelope);
 
-        String param = null;
+        String param;
         // Verify the envelope request and gen the param needed, return BadRequest in case is wrong
         switch (envelope.toUpperCase()) {
             case "JSON":
@@ -94,7 +91,7 @@ public class P6RestService {
     @Consumes("application/json")
     public Response logStats(Stats stats,
                              @HeaderParam("user-agent") String userAgentString,
-                             @Context HttpServletRequest request) {
+                             @Context Request request) {
 
         LOGGER.info("stats: " + stats + ", request by: " + request.getRemoteAddr());
 
@@ -103,8 +100,7 @@ public class P6RestService {
         // Set all the inputs to insert the data in parse
         ParseInput parseInput = new ParseInput();
         parseInput.setIp(request.getRemoteAddr());
-        parseInput.setBrowser(userAgent.getBrowser().getName());
-        parseInput.setBrowserVersion(userAgent.getBrowserVersion().getVersion());
+        parseInput.setBrowser(userAgent.getBrowser().getGroup().getName());
         parseInput.setParams(stats.getParams());
 
         // Set parse parameters
@@ -133,7 +129,26 @@ public class P6RestService {
     @GET
     @Path("/stats/{method}")
     @Produces("application/json")
-    public Response getMethodStats(@PathParam("method") String method){
+    public Response getMethodStats(@PathParam("method") String method) {
+        JsonParser parser = new JsonParser();
+        Gson gson = new Gson();
+
+        LOGGER.info("Stats request: " + method);
+
+        // Special case, this method will make multiples calls to parse
+        if ("envelopes".equalsIgnoreCase(method)) {
+            List<String> envelopes = new ArrayList<>();
+
+            P6RestService.addEnvelopes(envelopes, "info");
+            P6RestService.addEnvelopes(envelopes, "weather");
+
+            EnvelopeStats envelopeStats = new EnvelopeStats();
+
+            envelopeStats.setJSON(Collections.frequency(envelopes, "json"));
+            envelopeStats.setSOAP(Collections.frequency(envelopes, "soap"));
+
+            return Response.ok(gson.toJson(envelopeStats)).build();
+        }
 
         // Set parse parameters
         Map<String, String> headersMap = new HashMap<>();
@@ -150,6 +165,75 @@ public class P6RestService {
                 .exchange(PARSE_URL + method.toUpperCase()
                         , HttpMethod.GET, entity, String.class);
 
-        return Response.ok(responseEntity.getBody()).build();
+        JsonObject jsonObject = parser.parse(responseEntity.getBody()).getAsJsonObject();
+
+        String data;
+        switch (method.toUpperCase()) {
+            case "BROWSER":
+                List<String> browsers = new ArrayList<>();
+                for (JsonElement jsonElement : jsonObject.getAsJsonArray("results")) {
+                    // All the data in parse has a column named browser, there's no need to assert it
+                    browsers.add(jsonElement.getAsJsonObject().get("browser").getAsString());
+                }
+                Set<String> browsersUnique = new HashSet<>(browsers);
+
+                BrowserStats stats = new BrowserStats();
+
+                for (String browser : browsersUnique) {
+                    stats.addBrowser(browser, Collections.frequency(browsers, browser));
+                }
+
+                data = gson.toJson(stats);
+                break;
+            default:
+
+                StatsWrapper wrapper = new StatsWrapper();
+                for (JsonElement jsonElement : jsonObject.getAsJsonArray("results")) {
+                    wrapper.add(jsonElement.getAsJsonObject().get("params"));
+                }
+
+                data = gson.toJson(wrapper);
+                break;
+        }
+
+        return Response.ok(data).build();
+    }
+
+    /**
+     * given a class in parse looks for the param env and verifies whether the param
+     * "env" is json or soap
+     *
+     * @param envelopes  the list where all the data will be saved
+     * @param parseClass the class in parse
+     */
+    private static void addEnvelopes(List<String> envelopes, String parseClass) {
+
+        // Set parse parameters
+        Map<String, String> headersMap = new HashMap<>();
+        headersMap.put("X-Parse-Application-Id", PARSE_APP_ID);
+        headersMap.put("X-Parse-REST-API-Key", PARSE_REST_KEY);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAll(headersMap);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> responseEntity = new RestTemplate()
+                .exchange(PARSE_URL + parseClass.toUpperCase()
+                        , HttpMethod.GET, entity, String.class);
+
+        JsonParser parser = new JsonParser();
+        JsonObject jsonObject = parser.parse(responseEntity.getBody()).getAsJsonObject();
+
+        for (JsonElement jsonElement : jsonObject.getAsJsonArray("results")) {
+            JsonElement envElement = jsonElement.getAsJsonObject()
+                    .get("params").getAsJsonObject()
+                    .get("env");
+            if (envElement != null) {
+                String env = envElement.getAsString();
+                if ("json".equalsIgnoreCase(env) || "soap".equalsIgnoreCase(env))
+                    envelopes.add(env.toLowerCase());
+            }
+        }
     }
 }

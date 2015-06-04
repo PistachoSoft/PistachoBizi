@@ -30,7 +30,6 @@ dependencies {
             'org.jdom:jdom2:2.0.6',
             'eu.bitwalker:UserAgentUtils:1.15'
     compile("org.springframework:spring-web")
-    providedCompile("javax.servlet:servlet-api:2.5")
 
 //    Axis stuff
     compile 'commons-discovery:commons-discovery:0.2'

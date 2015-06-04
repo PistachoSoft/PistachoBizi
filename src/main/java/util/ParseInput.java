@@ -8,7 +8,6 @@ public class ParseInput {
     String ip;
     Params params;
     String browser;
-    String browserVersion;
 
     public String getIp() {
         return ip;
@@ -34,21 +33,4 @@ public class ParseInput {
         this.params = params;
     }
 
-    public String getBrowserVersion() {
-        return browserVersion;
-    }
-
-    public void setBrowserVersion(String browserVersion) {
-        this.browserVersion = browserVersion;
-    }
-
-    @Override
-    public String toString() {
-        return "ParseInput{" +
-                "ip='" + ip + '\'' +
-                ", params='" + params + '\'' +
-                ", browser='" + browser + '\'' +
-                ", browserVersion='" + browserVersion + '\'' +
-                '}';
-    }
 }
