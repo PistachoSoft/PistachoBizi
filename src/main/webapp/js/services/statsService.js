@@ -9,7 +9,11 @@ angular.module('pistachoBizi')
             WEA: 'weather',
             INF: 'info',
             //functions
-            log: log
+            log: log,
+            loadInfo: loadInfo,
+            loadRoute: loadRoute,
+            loadInfoDays: loadInfoDays,
+            loadRouteDays: loadRouteDays
         });
 
         function log(method, params) {
@@ -27,7 +31,47 @@ angular.module('pistachoBizi')
                 });
         }
 
-        function geolocate() {
+        function loadInfo($scope) {
+
+            $http.get('data/data1.json').success(function(data){
+                $scope.stations_info_ranking = data.stats;
+                for(var i = 0; i < data.stats.length; i++){
+                    $scope.stations_info.push('Station '+data.stats[i].station);
+                    $scope.stations_info_data.push(data.stats[i].data);
+                }
+            });
+        }
+
+        function loadRoute($scope) {
+
+            $http.get('data/data2.json').success(function(data){
+                $scope.stations_route_ranking = data.stats;
+                for(var i = 0; i < data.stats.length; i++){
+                    $scope.stations_route.push('Station '+data.stats[i].station);
+                    $scope.stations_route_data.push(data.stats[i].data);
+                }
+            });
+        }
+
+        function loadInfoDays($scope){
+            $http.get('data/data3.json').success(function(data){
+                for(var i = 0; i < data.stats.length; i++){
+                    $scope.days_info_data.push(data.stats[i].number);
+                }
+                $scope.days_info_data = [$scope.days_info_data];
+            });
+        }
+
+        function loadRouteDays($scope){
+            $http.get('data/data4.json').success(function(data){
+                for(var i = 0; i < data.stats.length; i++){
+                    $scope.days_route_data.push(data.stats[i].number);
+                }
+                $scope.days_route_data = [$scope.days_route_data];
+            });
+        }
+
+        /*function geolocate() {
             if(navigator.geolocation) {
 
                 var pos;
@@ -43,7 +87,7 @@ angular.module('pistachoBizi')
             } else {
                 return -1;
             }
-        }
+        }*/
 
         function browserify() {
             var ua= navigator.userAgent, tem,

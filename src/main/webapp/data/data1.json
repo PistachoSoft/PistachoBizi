@@ -1,0 +1,52 @@
+{
+  "stats": [
+    {
+      "station": 1,
+      "data": 657
+    },
+    {
+      "station": 2,
+      "data": 43
+    },
+    {
+      "station": 3,
+      "data": 3655
+    },
+    {
+      "station": 4,
+      "data": 865
+    },
+    {
+      "station": 5,
+      "data": 146
+    },
+    {
+      "station": 6,
+      "data": 432
+    },
+    {
+      "station": 7,
+      "data": 3213
+    },
+    {
+      "station": 8,
+      "data": 432
+    },
+    {
+      "station": 9,
+      "data": 12
+    },
+    {
+      "station": 10,
+      "data": 543
+    },
+    {
+      "station": 11,
+      "data": 1337
+    },
+    {
+      "station": 12,
+      "data": 43
+    }
+  ]
+}

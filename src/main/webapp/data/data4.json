@@ -1,0 +1,32 @@
+{
+  "stats": [
+    {
+      "day": "Mon",
+      "number": 676
+    },
+    {
+      "day": "Tue",
+      "number": 565
+    },
+    {
+      "day": "Wed",
+      "number": 664
+    },
+    {
+      "day": "Thu",
+      "number": 943
+    },
+    {
+      "day": "Fri",
+      "number": 786
+    },
+    {
+      "day": "Sat",
+      "number": 652
+    },
+    {
+      "day": "Sun",
+      "number": 43
+    }
+  ]
+}
