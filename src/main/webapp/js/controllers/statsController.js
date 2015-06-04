@@ -12,16 +12,23 @@ angular.module('pistachoBizi')
         $scope.labels2 = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
         $scope.data2 = [300, 500, 100];
 
-        //most info requested stations
-
-        $scope.methods_labels = [statsService.GEO, statsService.INF, statsService.ROU, statsService.WEA];
+        //envelopes
         $scope.env_labels = ["JSON", "XML"];
-        $scope.methods_data = [];
         $scope.env_data = [];
+
+        //browser
         $scope.browser_labels = [];
         $scope.browser_data = [];
-        $scope.stations_info = [];
-        $scope.stations_route = [];
+
+        //weather
+        $scope.weather_labels = [];
+        $scope.weather_data = [];
+
+        //info
+        $scope.info_labels = [];
+        $scope.info_data = [];
+
+        /*$scope.stations_route = [];
         $scope.stations_info_data = [];
         $scope.stations_route_data = [];
         $scope.stations_info_ranking = [];
@@ -29,14 +36,14 @@ angular.module('pistachoBizi')
         $scope.days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
         $scope.days_series = ['Peaks'];
         $scope.days_info_data = [];
-        $scope.days_route_data = [];
+        $scope.days_route_data = [];*/
 
         //load data
         statsService.loadGeneral($scope);
-        statsService.loadInfo($scope);
+        /*statsService.loadInfo($scope);
         statsService.loadRoute($scope);
         statsService.loadInfoDays($scope);
-        statsService.loadRouteDays($scope);
+        statsService.loadRouteDays($scope);*/
         //statsService.loadHeatMap();
 
     }]);

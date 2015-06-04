@@ -8,11 +8,12 @@ angular.module('pistachoBizi')
 
         return ({
             //constants
-            GEO: 'geolocation',
-            ROU: 'route',
+            //GEO: 'geolocation',
+            //ROU: 'route',
             WEA: 'weather',
             INF: 'info',
             BRO: 'browser',
+            ENV: 'envelope',
             //functions
             log: log,
             loadGeneral: loadGeneral,
@@ -44,24 +45,38 @@ angular.module('pistachoBizi')
 
         function loadGeneral($scope) {
 
-            $http.get('data/dataMethods.json').success(function(data){
+            /*$http.get('data/dataMethods.json').success(function(data){
                 $scope.methods_data.push(data.stats.geolocation);
                 $scope.methods_data.push(data.stats.info);
                 $scope.methods_data.push(data.stats.route);
                 $scope.methods_data.push(data.stats.weather);
                 $scope.methods_data = [$scope.methods_data];
-            });
+            });*/
 
-            $http.get('data/dataEnvelopes.json').success(function(data){
+            $http.get(API.URL+API.STATS+this.ENV).success(function(data){
                 $scope.env_data.push(data.stats.json);
                 $scope.env_data.push(data.stats.xml);
                 $scope.env_data = [$scope.env_data];
             });
 
-            $http.get('data/dataBrowsers.json').success(function(data){
+            $http.get(API.URL+API.STATS+this.BRO).success(function(data){
                 for(var i = 0; i < data.stats.length; i++){
                     $scope.browser_labels.push(data.stats[i].browser);
                     $scope.browser_data.push(data.stats[i].number);
+                }
+            });
+
+            $http.get(API.URL+API.STATS+this.WEA).success(function(data){
+                for(var i = 0; i < data.stats.length; i++){
+                    $scope.weather_labels.push(data.stats[i].data);
+                    $scope.weather_data.push(data.stats[i].number);
+                }
+            });
+
+            $http.get(API.URL+API.STATS+this.INF).success(function(data){
+                for(var i = 0; i < data.stats.length; i++){
+                    $scope.info_labels.push(data.stats[i].data);
+                    $scope.info_data.push(data.stats[i].number);
                 }
             });
         }

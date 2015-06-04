@@ -31,6 +31,7 @@ angular.module('pistachoBizi')
         function createAutocomplete($scope,id){
             var input = document.getElementById(id);
             var inputOptions = {
+                bounds: new google.maps.LatLngBounds(new google.maps.LatLng(41.6590394,-0.8745309),new google.maps.LatLng(41.6590394,-0.8745309)),
                 types: ['address'],
                 componentRestrictions: {country: 'es'}
             };
