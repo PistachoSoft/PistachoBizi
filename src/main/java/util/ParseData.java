@@ -3,10 +3,10 @@ package util;
 /**
  * Created by areyes on 04/06/15.
  */
-public class ParseInput {
+public class ParseData {
 
     String ip;
-    Params params;
+    String data;
     String browser;
 
     public String getIp() {
@@ -25,12 +25,11 @@ public class ParseInput {
         this.browser = browser;
     }
 
-    public Params getParams() {
-        return params;
+    public String getData() {
+        return data;
     }
 
-    public void setParams(Params params) {
-        this.params = params;
+    public void setData(String data) {
+        this.data = data;
     }
-
 }

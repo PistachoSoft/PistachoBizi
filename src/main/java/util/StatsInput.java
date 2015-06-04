@@ -3,12 +3,12 @@ package util;
 /**
  * Created by david on 03/06/2015.
  */
-public class Stats {
+public class StatsInput {
 
     private String method;
-    private Params params;
+    private String data;
 
-    public Stats() {
+    public StatsInput() {
     }
 
     public String getMethod() {
@@ -19,19 +19,19 @@ public class Stats {
         this.method = method;
     }
 
-    public Params getParams() {
-        return params;
+    public String getData() {
+        return data;
     }
 
-    public void setParams(Params params) {
-        this.params = params;
+    public void setData(String data) {
+        this.data = data;
     }
 
     @Override
     public String toString() {
-        return "Stats{" +
+        return "StatsInput{" +
                 "method='" + method + '\'' +
-                ", params='" + params + '\'' +
+                ", data='" + data + '\'' +
                 '}';
     }
 }
