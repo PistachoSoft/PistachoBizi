@@ -1,0 +1,15 @@
+{
+  "name": "PistachoBizi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install"
+  },
+  "dependencies": {
+    "bower": "^1.3.1"
+  },
+  "author": "SAReyes",
+  "license": "ISC"
+}

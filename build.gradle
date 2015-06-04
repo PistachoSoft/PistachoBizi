@@ -1,17 +1,25 @@
 apply plugin: 'war'
 apply plugin: 'java'
+apply plugin: 'spring-boot'
 
 war.archiveName 'bizi.war'
 
 sourceCompatibility = 1.8
 version = '1.0'
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+    }
+}
 repositories {
     mavenCentral()
 }
 
 dependencies {
-
     compile 'org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.13'
     compile 'org.glassfish.jersey.core:jersey-server:2.13'
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.13'
@@ -19,8 +27,9 @@ dependencies {
 
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.code.gson:gson:2.2.4',
-            'org.jdom:jdom2:2.0.6'
-    providedCompile 'javax.servlet:servlet-api:2.5'
+            'org.jdom:jdom2:2.0.6',
+            'eu.bitwalker:UserAgentUtils:1.15'
+    compile("org.springframework:spring-web")
 
 //    Axis stuff
     compile 'commons-discovery:commons-discovery:0.2'
@@ -36,27 +45,27 @@ dependencies {
 }
 
 task start(type: JavaExec) {
-    standardInput 	= System.in
-    group 			= 'Forecast Service'
-    description 	= 'STW-P6 Rest service @ http://localhost:8080/'
-    main 			= 'main.P6Server'
-    classpath 		= sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    group = 'Forecast Service'
+    description = 'STW-P6 Rest service @ http://localhost:8080/'
+    main = 'main.P6Server'
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 task deployAxisService(type: JavaExec) {
-    standardInput   = System.in
-    group           = 'Forecast Service'
-    description     = 'STW-P6 Soap service deploy'
-    main            = 'org.apache.axis.client.AdminClient'
-    classpath       = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    group = 'Forecast Service'
+    description = 'STW-P6 Soap service deploy'
+    main = 'org.apache.axis.client.AdminClient'
+    classpath = sourceSets.main.runtimeClasspath
     args('deploy.wsdd')
 }
 
 task undeployAxisService(type: JavaExec) {
-    standardInput   = System.in
-    group           = 'Forecast Service'
-    description     = 'STW-P6 Soap service undeploy'
-    main            = 'org.apache.axis.client.AdminClient'
-    classpath       = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    group = 'Forecast Service'
+    description = 'STW-P6 Soap service undeploy'
+    main = 'org.apache.axis.client.AdminClient'
+    classpath = sourceSets.main.runtimeClasspath
     args('undeploy.wsdd')
 }

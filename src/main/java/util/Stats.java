@@ -6,8 +6,7 @@ package util;
 public class Stats {
 
     private String method;
-    private String browser;
-    private String params;
+    private Params params;
 
     public Stats() {
     }
@@ -20,19 +19,19 @@ public class Stats {
         this.method = method;
     }
 
-    public String getBrowser() {
-        return browser;
-    }
-
-    public void setBrowser(String browser) {
-        this.browser = browser;
-    }
-
-    public String getParams() {
+    public Params getParams() {
         return params;
     }
 
-    public void setParams(String params) {
+    public void setParams(Params params) {
         this.params = params;
+    }
+
+    @Override
+    public String toString() {
+        return "Stats{" +
+                "method='" + method + '\'' +
+                ", params='" + params + '\'' +
+                '}';
     }
 }
