@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import util.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -91,7 +92,7 @@ public class P6RestService {
     @Consumes("application/json")
     public Response logStats(StatsInput stats,
                              @HeaderParam("user-agent") String userAgentString,
-                             @Context Request request) {
+                             @Context HttpServletRequest request) {
 
         LOGGER.info("StatsInput update: " + stats + ", request by: " + request.getRemoteAddr());
 

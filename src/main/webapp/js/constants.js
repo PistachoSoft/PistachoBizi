@@ -9,5 +9,5 @@ angular.module('pistachoBizi')
         'URL': 'http://'+location.host+'/bizi/api',
         'TOWNS': '/towns',
         'WEATHER': '/weather/',
-        'STATS': '/stats/'
+        'STATS': '/stats'
     });
