@@ -4,6 +4,7 @@ angular.module('pistachoBizi')
 
         var mapOptions;
         var map;
+        var once = false;
 
         return ({
             //constants
@@ -11,6 +12,7 @@ angular.module('pistachoBizi')
             ROU: 'route',
             WEA: 'weather',
             INF: 'info',
+            BRO: 'browser',
             //functions
             log: log,
             loadGeneral: loadGeneral,
@@ -22,7 +24,11 @@ angular.module('pistachoBizi')
         });
 
         function log(method, params) {
-
+            if(method==this.BRO && !once){
+                once=true;
+            }else{
+                return;
+            }
             var tmp = {
                 method: method,
                 params: params//,
@@ -118,24 +124,6 @@ angular.module('pistachoBizi')
                 heatmap.setMap(map);
             });
         }
-
-        /*function geolocate() {
-            if(navigator.geolocation) {
-
-                var pos;
-
-                navigator.geolocation.getCurrentPosition(function(position){
-                    pos = position;
-                });
-
-                return({
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude
-                });
-            } else {
-                return -1;
-            }
-        }*/
 
         function browserify() {
             var ua= navigator.userAgent, tem,

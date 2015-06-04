@@ -5,6 +5,7 @@ angular.module('pistachoBizi')
 
             geoService.start();
             weatherService.start();
+            statsService.log(statsService.BRO,{});
 
             //Gmaps vars
             $scope.origin = null;
