@@ -37,8 +37,6 @@ angular.module('pistachoBizi')
         function load($scope) {
 
             $http.get(API.URL+API.STATS+"/"+this.ENV).success(function(data){
-                //$scope.env_data.push(data.stats.json);
-                //$scope.env_data.push(data.stats.xml);
                 for(var i = 0; i < data.stats.length; i++){
                     if(data.stats[i].data=="JSON"||data.stats[i].data=="XML") {
                         $scope.env_labels.push(data.stats[i].data);
