@@ -28,22 +28,7 @@ angular.module('pistachoBizi')
         $scope.info_labels = [];
         $scope.info_data = [];
 
-        /*$scope.stations_route = [];
-        $scope.stations_info_data = [];
-        $scope.stations_route_data = [];
-        $scope.stations_info_ranking = [];
-        $scope.stations_route_ranking = [];
-        $scope.days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-        $scope.days_series = ['Peaks'];
-        $scope.days_info_data = [];
-        $scope.days_route_data = [];*/
-
         //load data
-        statsService.loadGeneral($scope);
-        /*statsService.loadInfo($scope);
-        statsService.loadRoute($scope);
-        statsService.loadInfoDays($scope);
-        statsService.loadRouteDays($scope);*/
-        //statsService.loadHeatMap();
+        statsService.load($scope);
 
     }]);

@@ -16,12 +16,7 @@ angular.module('pistachoBizi')
             ENV: 'envelope',
             //functions
             log: log,
-            loadGeneral: loadGeneral,
-            loadInfo: loadInfo,
-            loadRoute: loadRoute,
-            loadInfoDays: loadInfoDays,
-            loadRouteDays: loadRouteDays,
-            loadHeatMap: loadHeatMap
+            load: load
         });
 
         function log(method, params) {
@@ -32,9 +27,7 @@ angular.module('pistachoBizi')
             }
             var tmp = {
                 method: method,
-                params: params//,
-                //location: geolocate(),
-                //browser: browserify()
+                data: params
             };
 
             $http.post(API.URL + API.STATS,JSON.stringify(tmp))
@@ -43,15 +36,7 @@ angular.module('pistachoBizi')
                 });
         }
 
-        function loadGeneral($scope) {
-
-            /*$http.get('data/dataMethods.json').success(function(data){
-                $scope.methods_data.push(data.stats.geolocation);
-                $scope.methods_data.push(data.stats.info);
-                $scope.methods_data.push(data.stats.route);
-                $scope.methods_data.push(data.stats.weather);
-                $scope.methods_data = [$scope.methods_data];
-            });*/
+        function load($scope) {
 
             $http.get(API.URL+API.STATS+this.ENV).success(function(data){
                 $scope.env_data.push(data.stats.json);
@@ -62,97 +47,22 @@ angular.module('pistachoBizi')
             $http.get(API.URL+API.STATS+this.BRO).success(function(data){
                 for(var i = 0; i < data.stats.length; i++){
                     $scope.browser_labels.push(data.stats[i].browser);
-                    $scope.browser_data.push(data.stats[i].number);
+                    $scope.browser_data.push(data.stats[i].data);
                 }
             });
 
             $http.get(API.URL+API.STATS+this.WEA).success(function(data){
                 for(var i = 0; i < data.stats.length; i++){
-                    $scope.weather_labels.push(data.stats[i].data);
-                    $scope.weather_data.push(data.stats[i].number);
+                    $scope.weather_labels.push(data.stats[i].town);
+                    $scope.weather_data.push(data.stats[i].data);
                 }
             });
 
             $http.get(API.URL+API.STATS+this.INF).success(function(data){
                 for(var i = 0; i < data.stats.length; i++){
-                    $scope.info_labels.push(data.stats[i].data);
-                    $scope.info_data.push(data.stats[i].number);
+                    $scope.info_labels.push(data.stats[i].station);
+                    $scope.info_data.push(data.stats[i].data);
                 }
             });
         }
-
-        function loadInfo($scope) {
-
-            $http.get('data/data1.json').success(function(data){
-                $scope.stations_info_ranking = data.stats;
-                for(var i = 0; i < data.stats.length; i++){
-                    $scope.stations_info.push(data.stats[i].station);
-                    $scope.stations_info_data.push(data.stats[i].data);
-                }
-            });
-        }
-
-        function loadRoute($scope) {
-
-            $http.get('data/data2.json').success(function(data){
-                $scope.stations_route_ranking = data.stats;
-                for(var i = 0; i < data.stats.length; i++){
-                    $scope.stations_route.push(data.stats[i].station);
-                    $scope.stations_route_data.push(data.stats[i].data);
-                }
-            });
-        }
-
-        function loadInfoDays($scope){
-            $http.get('data/data3.json').success(function(data){
-                for(var i = 0; i < data.stats.length; i++){
-                    $scope.days_info_data.push(data.stats[i].number);
-                }
-                $scope.days_info_data = [$scope.days_info_data];
-            });
-        }
-
-        function loadRouteDays($scope){
-            $http.get('data/data4.json').success(function(data){
-                for(var i = 0; i < data.stats.length; i++){
-                    $scope.days_route_data.push(data.stats[i].number);
-                }
-                $scope.days_route_data = [$scope.days_route_data];
-            });
-        }
-
-        function loadHeatMap(){
-            mapOptions = {
-                center: { lat: 41.6590394, lng: -0.8745309},
-                zoom: 14
-            };
-            map = new google.maps.Map(document.getElementById('heatmap'), mapOptions);
-
-            $http.get('data/data5.json').success(function(data) {
-
-                var pointArray = new google.maps.MVCArray(data.pos);
-
-                var heatmap = new google.maps.visualization.HeatmapLayer({
-                    data: pointArray
-                });
-
-                heatmap.setMap(map);
-            });
-        }
-
-        function browserify() {
-            var ua= navigator.userAgent, tem,
-                M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-            if(/trident/i.test(M[1])){
-                tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
-                return 'IE '+(tem[1] || '');
-            }
-            if(M[1]=== 'Chrome'){
-                tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
-                if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
-            }
-            M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
-            if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
-            return M.join(' ');
-        };
     }]);

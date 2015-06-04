@@ -5,7 +5,7 @@ angular.module('pistachoBizi')
 
             geoService.start();
             weatherService.start();
-            statsService.log(statsService.BRO,{});
+            statsService.log(statsService.BRO,null);
 
             //Gmaps vars
             $scope.origin = null;
@@ -36,14 +36,8 @@ angular.module('pistachoBizi')
                 //console.log("Id: ",$scope.destination_id);
                 //console.log("Envelope: ",$scope.infEnvelope.env);
                 geoService.getInfoBizi(event, $scope.destination_id, $scope.infEnvelope.env);
-                statsService.log(statsService.ENV,
-                    {
-                        env: $scope.infEnvelope.env
-                    });
-                statsService.log(statsService.INF,
-                    {
-                        data: $scope.destination + " [" + $scope.destination_id + "]"
-                    });
+                statsService.log(statsService.ENV,$scope.infEnvelope.env);
+                statsService.log(statsService.INF,$scope.destination + " [" + $scope.destination_id + "]");
             };
 
             $scope.findRoute = function () {
@@ -53,13 +47,6 @@ angular.module('pistachoBizi')
                 //console.log("Origin: ",$scope.origin);
                 //console.log("Destination: ",$scope.destination);
                 geoService.findRoute($scope.origin, $scope.destination_coords.lat(), $scope.destination_coords.lng());
-                //var origin_coords = $scope.origin.split(',');
-                /*statsService.log(statsService.ROU,
-                    {
-                        lat: $scope.destination_coords.lat(),
-                        lng: $scope.destination_coords.lng(),
-                        dest: $scope.destination + " [" + $scope.destination_id + "]"
-                    });*/
             };
 
             $scope.getWeather = function () {
@@ -67,19 +54,12 @@ angular.module('pistachoBizi')
                 //console.log("Town: ",$scope.town.id);
                 //console.log("Envelope: ",$scope.weaEnvelope.env);
                 weatherService.getWeather($scope.town, $scope.weaEnvelope.env);
-                statsService.log(statsService.ENV,
-                    {
-                        env: $scope.weaEnvelope.env
-                    });
-                statsService.log(statsService.WEA,
-                    {
-                        data: $scope.town.id
-                    });
+                statsService.log(statsService.ENV,$scope.weaEnvelope.env);
+                statsService.log(statsService.WEA,$scope.town.town);
             };
 
             $scope.geolocate = function () {
                 //console.log("=== Geolocate ===");
                 geoService.geolocate($scope);
-                //statsService.log(statsService.GEO, {});
             };
         }]);
