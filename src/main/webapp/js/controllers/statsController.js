@@ -13,7 +13,7 @@ angular.module('pistachoBizi')
         $scope.data2 = [300, 500, 100];*/
 
         //envelopes
-        $scope.env_labels = ["JSON", "XML"];
+        $scope.env_labels = [];
         $scope.env_data = [];
 
         //browser

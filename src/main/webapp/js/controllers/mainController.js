@@ -37,7 +37,7 @@ angular.module('pistachoBizi')
                 //console.log("Envelope: ",$scope.infEnvelope.env);
                 geoService.getInfoBizi(event, $scope.destination_id, $scope.infEnvelope.env);
                 statsService.log(statsService.ENV,$scope.infEnvelope.env);
-                statsService.log(statsService.INF,$scope.destination + " [" + $scope.destination_id + "]");
+                statsService.log(statsService.INF,escape($scope.destination + " [" + $scope.destination_id + "]"));
             };
 
             $scope.findRoute = function () {
