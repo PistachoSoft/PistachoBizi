@@ -137,7 +137,7 @@ public class P6RestService {
     public Response getMethodStats(@PathParam("method") String method) {
         Gson gson = new Gson();
 
-        LOGGER.info("StatsInput request: " + method);
+        LOGGER.info("Stats request: " + method);
 
         if (!("envelope".equalsIgnoreCase(method) || "browser".equalsIgnoreCase(method) ||
                 "weather".equalsIgnoreCase(method) || "info".equalsIgnoreCase(method)))
@@ -167,6 +167,8 @@ public class P6RestService {
      * @param parseClass the class in parse
      */
     private static List<String> getData(String parseClass, String field) {
+        JsonParser parser = new JsonParser();
+
 
         List<String> r = new ArrayList<>();
 
@@ -181,10 +183,15 @@ public class P6RestService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<String> responseEntity = new RestTemplate()
-                .exchange(PARSE_URL + parseClass.toUpperCase()
+                .exchange(PARSE_URL + parseClass.toUpperCase() + "?limit=0&count=1"
                         , HttpMethod.GET, entity, String.class);
 
-        JsonParser parser = new JsonParser();
+        int count = parser.parse(responseEntity.getBody()).getAsJsonObject().get("count").getAsInt();
+
+        responseEntity = new RestTemplate()
+                .exchange(PARSE_URL + parseClass.toUpperCase() + "?limit=" + count
+                        , HttpMethod.GET, entity, String.class);
+
         JsonObject jsonObject = parser.parse(responseEntity.getBody()).getAsJsonObject();
 
         for (JsonElement jsonElement : jsonObject.getAsJsonArray("results")) {
