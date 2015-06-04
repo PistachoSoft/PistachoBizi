@@ -1,6 +1,8 @@
 package service;
 
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -10,7 +12,6 @@ import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import org.apache.axis.encoding.XMLType;
 import org.glassfish.grizzly.Grizzly;
-import org.glassfish.grizzly.http.server.Request;
 import org.jdom2.Element;
 import org.jdom2.output.XMLOutputter;
 import org.springframework.http.HttpEntity;
@@ -18,7 +19,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import util.*;
+import util.ParseData;
+import util.StatsInput;
+import util.StatsWrapper;
+import util.Towns;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
@@ -145,10 +149,12 @@ public class P6RestService {
 
         List<String> dataInfo = P6RestService.getData(method, field);
 
-        Set<String> dataUnique = new HashSet<>(dataInfo);
+        Collection<String> dataUpper = Collections2.transform(dataInfo, String::toUpperCase);
+
+        Set<String> dataUnique = new HashSet<>(dataUpper);
 
         for (String data : dataUnique) {
-            wrapper.add(data, Collections.frequency(dataInfo, data));
+            wrapper.add(data, Collections.frequency(dataUpper, data));
         }
 
         return Response.ok(gson.toJson(wrapper)).build();
