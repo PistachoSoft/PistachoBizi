@@ -1,7 +1,7 @@
 angular.module('pistachoBizi')
 
     .controller('StatsCtrl', ['$scope', 'statsService', function($scope,statsService){
-        $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+        /*$scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
         $scope.series = ['Series A', 'Series B'];
 
         $scope.data = [
@@ -10,7 +10,7 @@ angular.module('pistachoBizi')
         ];
 
         $scope.labels2 = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-        $scope.data2 = [300, 500, 100];
+        $scope.data2 = [300, 500, 100];*/
 
         //envelopes
         $scope.env_labels = ["JSON", "XML"];

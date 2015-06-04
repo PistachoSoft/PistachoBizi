@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="jumbotron">
-                <p>Method requests</p>
-                <canvas class="chart chart-bar" data="methods_data" labels="methods_labels"></canvas>
+                <p>Browser requests</p>
+                <canvas class="chart chart-pie" data="browser_data" labels="browser_labels"></canvas>
             </div>
         </div>
         <div class="col-md-6">
@@ -16,75 +16,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="jumbotron">
-                <p>Browser requests</p>
-                <canvas class="chart chart-pie" data="browser_data" labels="browser_labels"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             <div class="jumbotron">
-                <p>Most info requested on stations</p>
-                <canvas class="chart chart-pie" data="stations_info_data" labels="stations_info"></canvas>
+                <p>Info requests by stations</p>
+                <canvas class="chart chart-pie" data="info_data" labels="info_labels"></canvas>
             </div>
         </div>
         <div class="col-md-6">
             <div class="jumbotron">
-                <p>Ranking of stations by info requests</p>
-                <ol>
-                    <li ng-repeat="rank in stations_info_ranking | orderBy: '-data' | limitTo:10">
-                        Station {{rank.station}}
-                    </li>
-                </ol>
+                <p>Weather requests by town</p>
+                <canvas class="chart chart-pie" data="weather_data" labels="weather_labels"></canvas>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="jumbotron">
-                <p>Info requests by week day</p>
-                <canvas class="chart chart-line" data="days_info_data" labels="days" series="days_series"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="jumbotron">
-                <p>Most routed stations</p>
-                <canvas class="chart chart-pie" data="stations_route_data" labels="stations_route"></canvas>
-                <!--<canvas id="bar3" class="chart chart-bar" data="data" labels="labels"></canvas>-->
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="jumbotron">
-                <p>Ranking of stations by route requests</p>
-                <ol>
-                    <li ng-repeat="rank in stations_route_ranking | orderBy: '-data' | limitTo: 10">
-                        Station {{rank.station}}
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="jumbotron">
-                <p>Route requests by week day</p>
-                <canvas class="chart chart-line" data="days_route_data" labels="days" series="days_series"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="padding-bottom: 100px">
-        <!--<div class="col-md-offset-3 col-md-6">
-            <div class="jumbotron">
-                <p>Route destinations heatmap</p>
 
-                <div id="heatmap" style="height: 400px"></div>
-            </div>
-        </div>-->
     </div>
+    <div class="row" style="padding-bottom: 100px"></div>
 </div>
 </div>
 

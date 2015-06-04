@@ -8,8 +8,6 @@ angular.module('pistachoBizi')
 
         return ({
             //constants
-            //GEO: 'geolocation',
-            //ROU: 'route',
             WEA: 'weather',
             INF: 'info',
             BRO: 'browser',
