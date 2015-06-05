@@ -13,44 +13,30 @@ schemes:
 paths:
 
   /towns:
-
     get:
-
-      description: |
-        Gets `Town` objects.
+      description: Gets `Town` objects.
       produces: 
       - application/json
-
       responses:
-
         200:
           description: Successful response
           schema:
-            title: towns
-            type: array
-            items:
-              type: object
-              properties:
-                id:
-                  type: integer
-                town:
-                  type: string
+            $ref: '#/definitions/Towns'
+            
   /weather/{townId}/{envelope}:
     get:
-      description: |
-        Gests weather for given `townId` inside specified `envelope`
+      description: Gests weather for given `townId` inside specified `envelope`
       parameters: 
         - name: townId
           in: path
-          description: the town ID according to Spain
+          description: the town ID according to Spanish rules
           required: true
           type: integer
           minimum: 50001
           maximum: 50298
         - name: envelope
           in: path
-          description: the envelope in which weather must be requested 
-                        either JSON or XML
+          description: the envelope in which weather must be requested either JSON or XML
           required: true
           type: string
           enum: [ "JSON", "XML" ]
@@ -59,4 +45,79 @@ paths:
       responses:
         200:
           description: Successful response
-
+        400:
+          description: Bad request
+          
+  /stats:
+    post:
+      description: Posts stats for server to process and resend to Parse
+      parameters:
+        - name: formData
+          in: body
+          description: Data to log in Parse
+          required: true
+          schema: 
+            $ref: '#/definitions/LogData'
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+          
+  /stats/{method}:
+    get:
+      description: Gets data from server to show statistics
+      parameters:
+        - name: method
+          in: path
+          description: Stat method to retrieve
+          required: true
+          type: string
+          enum: ["envelope", "browser", "info", "weather"]
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successful response
+          schema: 
+            $ref: '#/definitions/Stats'
+        400:
+          description: Bad request
+        500:
+          description: Internal server error
+          
+definitions:
+  LogData:
+    properties:
+      method:
+        type: string
+        enum: ["envelope", "browser", "info", "weather"]
+      data:
+        type: string
+        enum: ["JSON", "XML"]
+  Towns:
+    properties:
+      towns:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+            town:
+              type: string
+  Stats:
+    properties:
+      stats:
+        type: array
+        items:
+            type: object
+            properties:
+              data:
+                type: string
+              number:
+                type: integer
+        
+        
